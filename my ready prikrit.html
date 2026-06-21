@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prikritcraetion</title>
+    <style>
+      :root {
+        --bg: #0b1220;
+        --card: #131d34;
+        --accent: #5c9fff;
+        --text: #f5f8ff;
+        --muted: #a8b2d1;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Inter, system-ui, sans-serif;
+        background: linear-gradient(180deg, #0b1220 0%, #11182b 100%);
+        color: var(--text);
+        line-height: 1.6;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      .container {
+        width: min(1200px, calc(100% - 2rem));
+        margin: 0 auto;
+      }
+      header {
+        padding: 1.5rem 0;
+      }
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+      }
+      .logo img {
+        width: 48px;
+        height: auto;
+        display: block;
+      }
+      .nav-links {
+        display: flex;
+        gap: 1.5rem;
+      }
+      .nav-links a {
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+      .nav-links a:hover {
+        color: var(--text);
+      }
+      .hero {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        align-items: center;
+        gap: 2rem;
+        padding: 4rem 0;
+      }
+      .hero h1 {
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
+        margin-bottom: 1rem;
+        color: #edf7ff;
+        line-height: 1.05;
+        letter-spacing: 0.02em;
+        -webkit-text-stroke: 1.2px rgba(92, 159, 255, 0.8);
+        text-shadow:
+          0 0 10px rgba(92, 159, 255, 0.85),
+          0 0 20px rgba(92, 159, 255, 0.45),
+          0 0 30px rgba(255, 115, 129, 0.25),
+          0 0 40px rgba(92, 159, 255, 0.6);
+        animation: neon-text 3s ease-in-out infinite alternate, neon-stroke 2.5s ease-in-out infinite;
+      }
+      .hero p {
+        max-width: 42rem;
+        color: var(--muted);
+        margin-bottom: 2rem;
+      }
+      @keyframes neon-text {
+        0% {
+          text-shadow:
+            0 0 8px rgba(92, 159, 255, 0.8),
+            0 0 18px rgba(92, 159, 255, 0.5),
+            0 0 28px rgba(255, 115, 129, 0.2);
+          color: #eaf3ff;
+        }
+        50% {
+          text-shadow:
+            0 0 12px rgba(92, 159, 255, 1),
+            0 0 26px rgba(92, 159, 255, 0.7),
+            0 0 42px rgba(255, 115, 129, 0.35);
+          color: #fff;
+        }
+        100% {
+          text-shadow:
+            0 0 10px rgba(92, 159, 255, 0.85),
+            0 0 20px rgba(92, 159, 255, 0.55),
+            0 0 30px rgba(255, 115, 129, 0.25);
+          color: #edf7ff;
+        }
+      }
+      .hero .buttons {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      .button,
+      .button.secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        border: none;
+        padding: 1rem 1.6rem;
+        border-radius: 999px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      }
+      .button:hover,
+      .button.secondary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+      }
+      .button svg {
+        width: 1rem;
+        height: 1rem;
+        fill: currentColor;
+      }
+      .button {
+        background: var(--accent);
+        color: #08112a;
+      }
+      .button.secondary {
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--text);
+      }
+      .hero-visual {
+        position: relative;
+        overflow: hidden;
+        background: radial-gradient(circle at top left, rgba(92,159,255,0.2), transparent 35%),
+          radial-gradient(circle at bottom right, rgba(255, 115, 129,0.15), transparent 30%);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 32px;
+        padding: 2rem;
+        animation: float 8s ease-in-out infinite;
+      }
+      .hero-visual::before,
+      .hero-visual::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 1;
+      }
+      .hero-visual::before {
+        width: 260px;
+        height: 260px;
+        top: -80px;
+        left: -80px;
+        border: 2px solid rgba(92, 159, 255, 0.55);
+        box-shadow: 0 0 40px rgba(92, 159, 255, 0.45), inset 0 0 20px rgba(92, 159, 255, 0.2);
+        animation: neon-ring 12s linear infinite;
+      }
+      .hero-visual::after {
+        width: 220px;
+        height: 220px;
+        bottom: -90px;
+        right: -90px;
+        border: 2px solid rgba(255, 115, 129, 0.55);
+        box-shadow: 0 0 40px rgba(255, 115, 129, 0.35), inset 0 0 20px rgba(255, 115, 129, 0.15);
+        animation: neon-ring-reverse 10s linear infinite;
+      }
+      .hero-visual .card {
+        position: relative;
+        z-index: 2;
+        background: rgba(16, 24, 46, 0.94);
+        border-radius: 24px;
+        padding: 2rem;
+        box-shadow: 0 30px 90px rgba(0, 0, 0, 0.25);
+      }
+      @keyframes neon-ring {
+        0% {
+          transform: rotate(0deg) scale(0.96) translateX(0);
+          opacity: 0.6;
+          filter: blur(1px);
+        }
+        25% {
+          transform: rotate(90deg) scale(1.1) translateX(8px);
+          opacity: 0.9;
+          filter: blur(0px);
+        }
+        50% {
+          transform: rotate(180deg) scale(1.05) translateX(0);
+          opacity: 1;
+          filter: blur(0px);
+        }
+        75% {
+          transform: rotate(270deg) scale(1.08) translateX(-8px);
+          opacity: 0.85;
+          filter: blur(0.5px);
+        }
+        100% {
+          transform: rotate(360deg) scale(0.96) translateX(0);
+          opacity: 0.6;
+          filter: blur(1px);
+        }
+      }
+      @keyframes neon-ring-reverse {
+        0% {
+          transform: rotate(360deg) scale(0.96) translateY(8px);
+          opacity: 0.6;
+          filter: blur(1px);
+        }
+        25% {
+          transform: rotate(270deg) scale(1.08) translateY(0);
+          opacity: 0.85;
+          filter: blur(0.5px);
+        }
+        50% {
+          transform: rotate(180deg) scale(1.02) translateY(-8px);
+          opacity: 1;
+          filter: blur(0px);
+        }
+        75% {
+          transform: rotate(90deg) scale(1.1) translateY(0);
+          opacity: 0.9;
+          filter: blur(0px);
+        }
+        100% {
+          transform: rotate(0deg) scale(0.96) translateY(8px);
+          opacity: 0.6;
+          filter: blur(1px);
+        }
+      }
+      @keyframes float {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 0.9;
+        }
+        25% {
+          transform: translateY(-15px) rotate(2deg);
+          opacity: 1;
+        }
+        50% {
+          transform: translateY(-8px) rotate(0deg);
+          opacity: 0.95;
+        }
+        75% {
+          transform: translateY(-12px) rotate(-2deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 0.9;
+        }
+      }
+      .hero-visual h2 {
+        margin-bottom: 0.75rem;
+      }
+      .hero-visual p {
+        color: var(--muted);
+      }
+      .animate-click {
+        animation: pop 0.5s ease forwards;
+      }
+      @keyframes pop {
+        0% {
+          opacity: 0;
+          transform: translateY(20px) scale(0.98);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      section {
+        padding: 3rem 0;
+      }
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+      }
+      .section-title span {
+        width: 3rem;
+        height: 3px;
+        background: var(--accent);
+        display: inline-block;
+      }
+      .section-title h2 {
+        font-size: 1.8rem;
+      }
+      .services,
+      .portfolio {
+        display: grid;
+        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 24px;
+        padding: 1.75rem;
+      }
+      .card h3 {
+        margin-bottom: 0.75rem;
+      }
+      .card p {
+        color: var(--muted);
+      }
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 2rem;
+      }
+      .contact-form {
+        background: var(--card);
+        padding: 2rem;
+        border-radius: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .contact-form label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+      }
+      .contact-form input,
+      .contact-form textarea {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        color: var(--text);
+        padding: 0.95rem 1rem;
+        margin-bottom: 1rem;
+      }
+      .contact-form textarea {
+        min-height: 160px;
+        resize: vertical;
+      }
+      .contact-form button {
+        width: 100%;
+        margin-top: 0.5rem;
+      }
+      footer {
+        padding: 2rem 0 1rem;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+      @media (max-width: 880px) {
+        .hero,
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 600px) {
+        .nav {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .nav-links {
+          flex-wrap: wrap;
+          gap: 1rem;
+          margin-top: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="container">
+      <div class="nav">
+        <div class="logo">
+          <img src="C:\Users\Bell\Documents\360 view nepal.png" alt="prikritcraetion logo" />
+          <span>prikritcraetion</span>
+        </div>
+        <nav class="nav-links">
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div>
+          <p style="color: var(--accent); text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.85rem;">Creative digital solutions</p>
+          <h1>Build your brand with prikritcraetion</h1>
+          <p>We design modern websites, digital marketing strategies, and brand experiences that help businesses grow. Fast. Clean. Reliable.</p>
+          <div class="buttons">
+            <a class="button" href="#contact">
+              Start a Project
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17l5-5-5-5v10z"/></svg>
+            </a>
+            <a class="button secondary" href="#portfolio">
+              View Work
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17l5-5-5-5v10z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="card">
+            <h2>Digital craftsmanship</h2>
+            <p>prikritcraetion helps brands stand out with premium visuals, intuitive user experiences, and high-performance web solutions.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="section-title">
+          <span></span>
+          <h2>About Us</h2>
+        </div>
+        <p style="max-width: 760px; color: var(--muted);">At prikritcraetion, we combine creativity, technology, and strategy to deliver websites and digital products that connect with your audience. From startups to established brands, our work is built to impress and perform.</p>
+      </section>
+
+      <section id="services">
+        <div class="section-title">
+          <span></span>
+          <h2>Our Services</h2>
+        </div>
+        <div class="services">
+          <div class="card">
+            <h3>Web Design</h3>
+            <p>Custom website design that captures attention, communicates your brand story, and delivers a seamless experience.</p>
+          </div>
+          <div class="card">
+            <h3>Brand Identity</h3>
+            <p>Logo design, visual systems, and brand messaging that create consistency and trust across every touchpoint.</p>
+          </div>
+          <div class="card">
+            <h3>Digital Marketing</h3>
+            <p>Social media, content, and campaign strategies that grow awareness, engagement, and conversions.</p>
+          </div>
+          <div class="card">
+            <h3>E-commerce</h3>
+            <p>Online store design and optimization that makes buying easy, secure, and enjoyable for customers.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="portfolio">
+        <div class="section-title">
+          <span></span>
+          <h2>Featured Projects</h2>
+        </div>
+        <div class="portfolio">
+          <div class="card">
+            <h3>Modern Brand Launch</h3>
+            <p>Launched a full website and brand identity for a boutique creative studio, generating strong first impressions and leads.</p>
+          </div>
+          <div class="card">
+            <h3>Performance Website</h3>
+            <p>Delivered a fast, responsive site for an e-commerce brand with optimized product showcases and checkout flow.</p>
+          </div>
+          <div class="card">
+            <h3>Marketing Campaign</h3>
+            <p>Created a social media campaign with custom visuals and messaging that boosted engagement by 30%.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="section-title">
+          <span></span>
+          <h2>Get in Touch</h2>
+        </div>
+        <div class="contact-grid">
+          <div>
+            <p style="color: var(--muted); margin-bottom: 1.5rem;">Whether you have a new project, need a refresh, or want to discuss ideas, our team at prikritcraetion is ready to help.</p>
+            <div class="card">
+              <h3>Contact Details</h3>
+              <p>Email: hello@prikritcraetion.com</p>
+              <p>Phone: +977 9842403853</p>
+              <p>Location: Kathmandu, Nepal</p>
+            </div>
+          </div>
+          <form id="contact-form" class="contact-form">
+            <label for="name">Name</label>
+            <input id="name" type="text" placeholder="Your name" />
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="your@email.com" />
+            <label for="message">Message</label>
+            <textarea id="message" placeholder="Tell us about your project"></textarea>
+            <button class="button" type="submit">Send Message</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="container">
+      <div style="display:flex;align-items:center;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <p>© 2026 prikritcraetion. Crafted for modern brands.</p>
+      </div>
+    </footer>
+    <script>
+      document.body.addEventListener("click", function (e) {
+        const elements = document.querySelectorAll(
+          ".hero, .hero-visual, .card, .section-title, .contact-form, footer, .button"
+        );
+        elements.forEach((el, index) => {
+          el.classList.remove("animate-click");
+          void el.offsetWidth;
+          el.classList.add("animate-click");
+          el.style.animationDelay = `${index * 0.05}s`;
+        });
+
+        // Redirect to WhatsApp if "Start a Project" button is clicked
+        if (e.target.closest('.button') && e.target.closest('.button').textContent.includes('Start a Project')) {
+          e.preventDefault();
+          window.open('https://wa.me/9779842403853', '_blank');
+        }
+      });
+
+      const contactForm = document.getElementById('contact-form');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const name = document.getElementById('name').value.trim();
+          const email = document.getElementById('email').value.trim();
+          const message = document.getElementById('message').value.trim();
+
+          if (!name || !email || !message) {
+            alert('Please fill in your name, email, and message.');
+            return;
+          }
+
+          const subject = `New inquiry from ${name}`;
+          const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
+          const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=abicreed72@gamil.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          window.location.href = gmailUrl;
+        });
+      }
+    </script>
+    <style>
+      /* 2026 trending H1 effect: animated chromatic-gradient + glass neon glow */
+      h1.trend-2026 {
+        display: inline-block;
+        position: relative;
+        color: #fff;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        background: linear-gradient(90deg, #0ff, #6f0, #f0f, #ff6, #06f);
+        background-size: 300% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 6px 18px rgba(0,0,0,0.45));
+        text-shadow:
+          0 0 8px rgba(255,255,255,0.05),
+          0 6px 20px rgba(0,0,0,0.5);
+        padding: 0.1em 0.15em;
+        transform: translateZ(0);
+        isolation: isolate;
+      }
+
+      /* Chromatic aberration layers using pseudo elements */
+      h1.trend-2026::before,
+      h1.trend-2026::after {
+        content: attr(data-text);
+        position: absolute;
+        left: 0; top: 0;
+        width: 100%; height: 100%;
+        -webkit-text-fill-color: transparent;
+        background: inherit;
+        background-clip: text;
+        -webkit-background-clip: text;
+        pointer-events: none;
+        mix-blend-mode: screen;
+        opacity: 0.9;
+      }
+
+      h1.trend-2026::before {
+        transform: translate3d(-4px, -2px, 0) skewX(-2deg);
+        filter: blur(4px) saturate(120%);
+        mask-image: linear-gradient(to right, transparent 0%, black 30%, black 70%, transparent 100%);
+      }
+
+      h1.trend-2026::after {
+        transform: translate3d(4px, 2px, 0) skewX(2deg);
+        filter: blur(6px) saturate(140%);
+        opacity: 0.6;
+      }
+
+      /* moving gradient gloss */
+      @keyframes glossMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 75% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      h1.trend-2026 {
+        animation: glossMove 4s ease-in-out infinite;
+      }
+
+      /* Respect reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        h1.trend-2026,
+        h1.trend-2026::before,
+        h1.trend-2026::after { animation: none !important; transform: none !important; filter: none !important; }
+      }
+    </style>
+
+    <script>
+      // Apply new 2026 trend class to all h1 elements and set data-text for pseudo elements
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('h1').forEach(function (h) {
+          h.classList.add('trend-2026');
+          h.setAttribute('data-text', h.textContent.trim());
+        });
+      });
+    </script>
+  </body>
+</html>
